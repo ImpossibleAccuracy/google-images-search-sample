@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_image_search">Search image</string>
+
+    <string name="title_no_search_result">AAAAA</string>
+    <string name="subtitle_no_search_result">BBBBBBB</string>
+</resources>
