@@ -10,10 +10,12 @@ import com.googleimagesearch.domain.repository.SearchRepository
 import com.googleimagesearch.feature.feed.viewmodel.FeedIntent
 import com.googleimagesearch.feature.feed.viewmodel.FeedUiState
 import com.googleimagesearch.navigation.screen.AppViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -43,9 +45,10 @@ class FeedViewModel(
     private var reloadJob: Job? = null
 
     init {
-        startReloadJob(force = true)
+        reloadJob = viewModelScope.launch {
+            loadSearchResults()
+        }
     }
-
 
     fun onIntent(intent: FeedIntent) {
         when (intent) {
@@ -84,9 +87,14 @@ class FeedViewModel(
                     query = uiState.value.query,
                 )
             )
+            .flowOn(Dispatchers.IO)
             .cachedIn(viewModelScope)
-            .collect {
-                _searchResults.value = it
+            .collect { pagingData ->
+                _searchResults.value = pagingData
+
+                _uiState.update {
+                    it.copy(isSearchResultInit = true)
+                }
             }
     }
 }

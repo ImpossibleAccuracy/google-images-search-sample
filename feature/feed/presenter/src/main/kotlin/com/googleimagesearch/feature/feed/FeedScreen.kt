@@ -68,6 +68,21 @@ fun FeedScreen(
             }
 
             when {
+                !uiState.isSearchResultInit || refresh is LoadState.Loading || append is LoadState.Loading -> {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            CircularProgressIndicator(
+                                color = MaterialTheme.colorScheme.secondary,
+                            )
+                        }
+                    }
+                }
+
                 refresh is LoadState.NotLoading && searchResults.itemCount < 1 -> {
                     item {
                         EmptyView(
@@ -85,21 +100,6 @@ fun FeedScreen(
                             title = stringResource(R.string.title_no_search_result),
                             subtitle = stringResource(R.string.subtitle_no_search_result),
                         )
-                    }
-                }
-
-                refresh is LoadState.Loading || append is LoadState.Loading -> {
-                    item {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(24.dp),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            CircularProgressIndicator(
-                                color = MaterialTheme.colorScheme.secondary,
-                            )
-                        }
                     }
                 }
 

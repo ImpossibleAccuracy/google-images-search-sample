@@ -2,6 +2,7 @@ package com.googleimagesearch.app.navigation
 
 import cafe.adriel.voyager.core.screen.Screen
 import com.googleimagesearch.feature.feed.FeedPage
+import com.googleimagesearch.feature.gallery.GalleryPage
 import com.googleimagesearch.navigation.Navigator
 import com.googleimagesearch.navigation.screen.SharedScreen
 
@@ -27,7 +28,6 @@ class AppNavigator(
     private fun getPageByScreen(screen: SharedScreen): Screen =
         when (screen) {
             SharedScreen.Feed -> FeedPage()
-            else -> TODO()
-//            is SharedScreen.Gallery -> GalleryPage(screen.selected, screen.items)
+            is SharedScreen.Gallery -> GalleryPage(screen.selected, screen.items)
         }
 }
