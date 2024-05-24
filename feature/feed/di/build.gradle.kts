@@ -39,8 +39,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.domain)
-    implementation(projects.feature.feed.presenter)
+    implementation(project(Modules.DOMAIN))
+    implementation(project(Modules.FEATURE_FEED.PRESENTER))
 
     implementation(libs.compose.runtime)
 

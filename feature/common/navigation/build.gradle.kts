@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.domain)
+    implementation(project(Modules.DOMAIN))
 
     implementation(libs.koin.core)
 

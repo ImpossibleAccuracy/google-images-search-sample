@@ -53,12 +53,12 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.domain)
-    implementation(projects.core.di)
-    implementation(projects.feature.common.navigation)
+    implementation(project(Modules.DOMAIN))
+    implementation(project(Modules.DI))
+    implementation(project(Modules.NAVIGATION))
 
-    implementation(projects.feature.feed.presenter)
-    implementation(projects.feature.feed.di)
+    implementation(project(Modules.FEATURE_FEED.PRESENTER))
+    implementation(project(Modules.FEATURE_FEED.DI))
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.activity)

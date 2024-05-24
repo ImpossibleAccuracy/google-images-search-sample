@@ -39,8 +39,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.domain)
-    implementation(projects.feature.common.navigation)
+    implementation(project(Modules.DOMAIN))
+    implementation(project(Modules.NAVIGATION))
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui.tooling)
