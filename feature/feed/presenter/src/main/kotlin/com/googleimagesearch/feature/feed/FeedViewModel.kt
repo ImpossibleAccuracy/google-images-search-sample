@@ -58,7 +58,20 @@ class FeedViewModel(
                         query = intent.query
                     )
                 }
+            }
 
+            FeedIntent.ClearQuery -> {
+                _searchResults.value = PagingData.empty()
+
+                _uiState.update {
+                    it.copy(
+                        isSearchResultInit = false,
+                        query = "",
+                    )
+                }
+            }
+
+            FeedIntent.Search -> {
                 startReloadJob()
             }
         }
@@ -73,7 +86,7 @@ class FeedViewModel(
             reloadJob?.cancel()
 
             reloadJob = viewModelScope.launch {
-                delay(SEARCH_IDLE)
+//                delay(SEARCH_IDLE)
 
                 loadSearchResults()
             }
@@ -81,20 +94,30 @@ class FeedViewModel(
     }
 
     private suspend fun loadSearchResults() {
-        searchRepository
-            .search<SearchResult.GoogleImage>(
-                parameters = defaultSearchParams.copy(
-                    query = uiState.value.query,
-                )
-            )
-            .flowOn(Dispatchers.IO)
-            .cachedIn(viewModelScope)
-            .collect { pagingData ->
-                _searchResults.value = pagingData
+        val query = uiState.value.query
 
-                _uiState.update {
-                    it.copy(isSearchResultInit = true)
+        if (query.isNotBlank()) {
+            searchRepository
+                .search<SearchResult.GoogleImage>(
+                    parameters = defaultSearchParams.copy(
+                        query = query,
+                    )
+                )
+                .flowOn(Dispatchers.IO)
+                .cachedIn(viewModelScope)
+                .collect { pagingData ->
+                    _searchResults.value = pagingData
+
+                    _uiState.update {
+                        it.copy(isSearchResultInit = true)
+                    }
                 }
+        } else {
+            _searchResults.value = PagingData.empty()
+
+            _uiState.update {
+                it.copy(isSearchResultInit = false)
             }
+        }
     }
 }

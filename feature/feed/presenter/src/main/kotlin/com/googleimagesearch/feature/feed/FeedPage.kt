@@ -1,12 +1,10 @@
 package com.googleimagesearch.feature.feed
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.googleimagesearch.navigation.LocalNavigator
@@ -25,15 +23,10 @@ class FeedPage : AppPage {
         val searchResults = viewModel.searchResults.collectAsLazyPagingItems()
 
         FeedScreen(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    horizontal = 16.dp,
-                    vertical = 12.dp,
-                ),
+            modifier = Modifier.fillMaxSize(),
             uiState = uiState,
             searchResults = searchResults,
-            onIntent = viewModel::onIntent,
+            newIntent = viewModel::onIntent,
             onOpenImage = { image ->
                 navigator.push(
                     SharedScreen.Gallery(

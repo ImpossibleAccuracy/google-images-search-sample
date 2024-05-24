@@ -1,4 +1,4 @@
-package com.googleimagesearch.feature.feed.views
+package com.googleimagesearch.feature.feed.views.base
 
 
 import androidx.compose.foundation.layout.Arrangement

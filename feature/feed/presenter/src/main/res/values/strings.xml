@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="label_image_search">Search image</string>
+    <string name="label_source">Source: %s</string>
 
-    <string name="title_no_search_result">AAAAA</string>
-    <string name="subtitle_no_search_result">BBBBBBB</string>
+    <string name="title_start_search">Start typing something…</string>
+    <string name="subtitle_start_search">Search results will display here</string>
+
+    <string name="title_no_search_result">No result for your query</string>
+    <string name="subtitle_no_search_result">Check the request and try again later</string>
 </resources>
