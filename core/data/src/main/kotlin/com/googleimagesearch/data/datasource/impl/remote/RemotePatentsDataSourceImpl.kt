@@ -1,7 +1,7 @@
 package com.googleimagesearch.data.datasource.impl.remote
 
 import com.googleimagesearch.data.datasource.declaration.PatentsDataSource
-import com.googleimagesearch.data.payload.PatentDto
+import com.googleimagesearch.data.payload.dto.PatentDto
 import com.googleimagesearch.domain.model.SearchParameters
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

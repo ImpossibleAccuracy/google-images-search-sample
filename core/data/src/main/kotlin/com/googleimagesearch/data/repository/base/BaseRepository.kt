@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 abstract class BaseRepository {
     protected fun <Model : Any, DTO : Any> doPagingRequest(
         pagingSource: BasePagingSource<Model, DTO>,
-        pageSize: Int = Constants.MAX_PAGE_SIZE,
+        pageSize: Int = Constants.PAGE_SIZE,
         prefetchDistance: Int = Constants.PREFETCH_DISTANCE,
         enablePlaceholders: Boolean = true,
         initialLoadSize: Int = pageSize * 3,

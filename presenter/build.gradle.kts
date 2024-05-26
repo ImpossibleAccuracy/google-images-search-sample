@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -19,6 +21,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val properties = Properties()
+        // TODO: change "gradle.properties" to "local.properties"
+        val propertiesFile = project.rootProject.file("gradle.properties")
+        properties.load(propertiesFile.inputStream())
+        buildConfigField("String", "SERPER_API_KEY", properties.getProperty("SERPER_API_KEY"))
     }
 
     buildTypes {
@@ -39,6 +47,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {

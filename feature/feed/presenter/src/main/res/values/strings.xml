@@ -8,4 +8,7 @@
 
     <string name="title_no_search_result">No result for your query</string>
     <string name="subtitle_no_search_result">Check the request and try again later</string>
+
+    <string name="title_error_loading_results">Results unavailable</string>
+    <string name="subtitle_error_loading_image">Error while fetching data</string>
 </resources>

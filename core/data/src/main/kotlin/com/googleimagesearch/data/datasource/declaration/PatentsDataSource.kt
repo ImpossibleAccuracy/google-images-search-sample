@@ -1,6 +1,6 @@
 package com.googleimagesearch.data.datasource.declaration
 
-import com.googleimagesearch.data.payload.PatentDto
+import com.googleimagesearch.data.payload.dto.PatentDto
 import com.googleimagesearch.domain.model.SearchParameters
 import pro.respawn.apiresult.ApiResult
 

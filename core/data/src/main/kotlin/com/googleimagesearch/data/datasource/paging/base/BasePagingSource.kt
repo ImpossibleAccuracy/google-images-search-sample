@@ -1,5 +1,6 @@
 package com.googleimagesearch.data.datasource.paging.base
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import pro.respawn.apiresult.fold
@@ -22,6 +23,9 @@ abstract class BasePagingSource<Model : Any, DTO : Any>(
                     )
                 },
                 onError = {
+                    Log.e(this::class.simpleName, it.message ?: "No error message")
+                    it.printStackTrace()
+
                     LoadResult.Error(it)
                 }
             )

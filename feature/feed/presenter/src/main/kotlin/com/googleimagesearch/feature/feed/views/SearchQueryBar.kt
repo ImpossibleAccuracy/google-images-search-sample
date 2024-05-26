@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
-import androidx.paging.compose.itemKey
 import com.googleimagesearch.domain.model.SearchResult
 import com.googleimagesearch.feature.feed.R
 import com.googleimagesearch.feature.feed.viewmodel.FeedIntent
@@ -129,16 +128,20 @@ private fun SearchResults(
                 Loader(
                     Modifier
                         .fillMaxSize()
-                        .padding(24.dp, 16.dp)
+                        .padding(contentPadding)
                 )
             }
 
             refresh is LoadState.Error || append is LoadState.Error -> {
-                LoadingErrorView()
+                Box(Modifier.padding(contentPadding)) {
+                    LoadingErrorView()
+                }
             }
 
             refresh is LoadState.NotLoading && searchResults.itemCount < 1 -> {
-                NoSearchResults()
+                Box(Modifier.padding(contentPadding)) {
+                    NoSearchResults()
+                }
             }
 
             refresh is LoadState.NotLoading -> {
@@ -149,7 +152,6 @@ private fun SearchResults(
                 ) {
                     items(
                         count = searchResults.itemCount,
-                        key = searchResults.itemKey { it.imageUrl },
                         contentType = searchResults.itemContentType(),
                     ) { index ->
                         val item = searchResults[index]!!
@@ -213,7 +215,7 @@ private fun LoadingErrorView() {
                 contentDescription = "",
             )
         },
-        title = stringResource(R.string.title_no_search_result),
-        subtitle = stringResource(R.string.subtitle_no_search_result),
+        title = stringResource(R.string.title_error_loading_results),
+        subtitle = stringResource(R.string.subtitle_error_loading_image),
     )
 }

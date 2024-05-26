@@ -32,7 +32,7 @@ android {
 
 dependencies {
     implementation(project(Modules.DOMAIN))
-    implementation(project(Modules.DATA))
+    api(project(Modules.DATA))
 
     implementation(libs.koin.core)
 

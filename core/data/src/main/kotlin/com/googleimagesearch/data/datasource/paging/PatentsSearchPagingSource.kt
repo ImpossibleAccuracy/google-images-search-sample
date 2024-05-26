@@ -2,7 +2,7 @@ package com.googleimagesearch.data.datasource.paging
 
 import com.googleimagesearch.data.datasource.declaration.PatentsDataSource
 import com.googleimagesearch.data.datasource.paging.base.BasePagingSource
-import com.googleimagesearch.data.payload.PatentDto
+import com.googleimagesearch.data.payload.dto.PatentDto
 import com.googleimagesearch.domain.model.SearchParameters
 import com.googleimagesearch.domain.model.SearchResult
 
