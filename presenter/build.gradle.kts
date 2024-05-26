@@ -74,6 +74,8 @@ dependencies {
     implementation(libs.voyager.transitions)
     implementation(libs.voyager.koin)
 
+    implementation(libs.coil)
+
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 }
