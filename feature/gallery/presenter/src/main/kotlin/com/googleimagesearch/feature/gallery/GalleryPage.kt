@@ -102,13 +102,13 @@ data class GalleryPage(
                     }
                 },
                 startDownloadingImage = { image ->
-                    if ((uiState.hasStoragePermissions ||
-                                VERSION.SDK_INT >= VERSION_CODES.R) &&
-                        notificationPermission?.status == PermissionStatus.Granted
+                    if ((uiState.hasStoragePermissions || VERSION.SDK_INT >= VERSION_CODES.R) &&
+                        (notificationPermission == null || notificationPermission.status == PermissionStatus.Granted)
                     ) {
                         startDownloadingImage(context, image)
-                    } else {
+                    } else if (!uiState.hasStoragePermissions && VERSION.SDK_INT < VERSION_CODES.R) {
                         storagePermissions.launchMultiplePermissionRequest()
+                    } else {
                         notificationPermission?.launchPermissionRequest()
                     }
                 },

@@ -147,15 +147,15 @@ class ImageDownloadWorker(
     }
 
     private fun showNotification(notification: NotificationCompat.Builder) {
-        createNotificationChannel()
-
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.POST_NOTIFICATIONS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            throw ImageDownloadException("No \"POST_NOTIFICATIONS\" permission")
+            return
         }
+
+        createNotificationChannel()
 
         NotificationManagerCompat.from(context).notify(
             NotificationConstants.INFO_NOTIFICATION_ID,
