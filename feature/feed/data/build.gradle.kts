@@ -1,12 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+
+    alias(libs.plugins.sqldelight)
 }
 
-group = AppConfig.buildGroup("feature", "feed")
+group = AppConfig.buildGroup("feature", "feed", "data")
 
 android {
-    namespace = AppConfig.buildGroup("feature", "feed")
+    namespace = AppConfig.APPLICATION_ID
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -28,31 +30,35 @@ android {
     kotlinOptions {
         jvmTarget = libs.versions.jvmTargetVersion.get()
     }
+}
 
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
+sqldelight {
+    databases {
+        create("FeedDatabase") {
+            packageName.set("com.googleimagesearch.feature.feed.data")
+        }
     }
 }
 
 dependencies {
     implementation(project(Modules.DOMAIN))
-    implementation(project(Modules.NAVIGATION))
     implementation(project(Modules.FEATURE_FEED.DOMAIN))
 
-    implementation(libs.compose.runtime)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
-
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.kotlinx.collections)
 
-    implementation(libs.coil)
-    implementation(libs.paging.compose)
+    implementation(libs.paging.common)
+    implementation(libs.apiresult)
+
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.gson)
+    api(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.retrofit.coroutines)
+
+    implementation(libs.sqldelight.android)
+    implementation(libs.sqldelight.coroutines)
+
+//    implementation(libs.room.runtime)
+//    ksp(libs.room.compiler)
 }

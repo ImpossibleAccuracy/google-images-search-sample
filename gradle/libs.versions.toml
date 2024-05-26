@@ -10,7 +10,9 @@ kotlin = "1.9.24"
 
 kotlinx-coroutines = "1.8.1"
 kotlinx-collections = "0.3.7"
+kotlinx-datetime = "0.5.0"
 
+core = "1.13.1"
 compose-bom = "2024.05.00"
 compose = "1.6.7"
 compose-material = "1.2.1"
@@ -30,14 +32,14 @@ okhttp = "5.0.0-alpha.3"
 gson = "2.10.1"
 retrofit = "2.9.0"
 retrofit-coroutines = "0.9.2"
-room = "2.6.1"
-core = "1.13.1"
+sqldelight = "2.0.1"
 
 
 [libraries]
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-collections" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 android-core = { group = "androidx.core", name = "core", version.ref = "core" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
@@ -60,7 +62,6 @@ voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voy
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
-
 paging-common = { module = "androidx.paging:paging-common-ktx", version.ref = "paging" }
 paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
 apiresult = { module = "pro.respawn.apiresult:core", version.ref = "apiresult" }
@@ -72,9 +73,8 @@ retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-coroutines = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "retrofit-coroutines" }
 
-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-
+sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -82,3 +82,5 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }

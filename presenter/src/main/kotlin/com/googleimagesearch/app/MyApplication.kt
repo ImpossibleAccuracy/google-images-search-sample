@@ -32,7 +32,7 @@ class MyApplication : Application(), ImageLoaderFactory {
             androidLogger()
             androidContext(this@MyApplication)
 
-            modules(totalAppModules)
+            modules(totalAppModules(applicationContext))
         }
     }
 }

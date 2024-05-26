@@ -40,6 +40,8 @@ android {
 
 dependencies {
     implementation(project(Modules.DOMAIN))
+    implementation(project(Modules.FEATURE_FEED.DOMAIN))
+    implementation(project(Modules.FEATURE_FEED.DATA))
     implementation(project(Modules.FEATURE_FEED.PRESENTER))
 
     implementation(libs.compose.runtime)

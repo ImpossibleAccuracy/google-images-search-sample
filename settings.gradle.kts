@@ -15,6 +15,8 @@ include(":feature:common:navigation")
 include(":presenter")
 
 include(":feature:feed:presenter")
+include(":feature:feed:domain")
+include(":feature:feed:data")
 include(":feature:feed:di")
 
 include(":feature:gallery:presenter")

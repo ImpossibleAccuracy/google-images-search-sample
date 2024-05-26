@@ -1,13 +1,17 @@
 package com.googleimagesearch.feature.feed.views
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -18,10 +22,12 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import com.googleimagesearch.domain.model.SearchResult
 import com.googleimagesearch.feature.feed.R
+import com.googleimagesearch.feature.feed.domain.model.SearchHistoryItem
 import com.googleimagesearch.feature.feed.viewmodel.FeedIntent
 import com.googleimagesearch.feature.feed.viewmodel.FeedUiState
 import com.googleimagesearch.feature.feed.views.base.EmptyView
 import com.googleimagesearch.feature.feed.views.base.Loader
+import kotlinx.collections.immutable.ImmutableList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -101,7 +107,14 @@ fun SearchQueryBar(
                 onOpenImage = onOpenImage
             )
         } else {
-            SearchSuggestions(contentPadding = contentPadding)
+            SearchSuggestions(
+                contentPadding = contentPadding,
+                searchHistory = uiState.searchHistory,
+                onHistoryItemSelected = {
+                    focusManager.clearFocus()
+                    newIntent(FeedIntent.SearchByHistoryItem(it))
+                }
+            )
         }
     }
 }
@@ -109,10 +122,53 @@ fun SearchQueryBar(
 @Composable
 private fun SearchSuggestions(
     contentPadding: PaddingValues,
+    searchHistory: ImmutableList<SearchHistoryItem>,
+    onHistoryItemSelected: (SearchHistoryItem) -> Unit,
 ) {
-    // TODO
-    Column(Modifier.padding(contentPadding)) {
-        Text(text = "Results will be displayed after search")
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .navigationBarsPadding(),
+    ) {
+        items(searchHistory) { item ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 56.dp)
+                    .clickable {
+                        onHistoryItemSelected(item)
+                    }
+                    .padding(
+                        start = contentPadding.calculateStartPadding(LocalLayoutDirection.current),
+                        end = contentPadding.calculateEndPadding(LocalLayoutDirection.current),
+                    ),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(ButtonDefaults.IconSpacing),
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.baseline_history_24),
+                    tint = MaterialTheme.colorScheme.onSurface,
+                    contentDescription = ""
+                )
+
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = item.text,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+
+                IconButton(onClick = {
+                    onHistoryItemSelected(item)
+                }) {
+                    Icon(
+                        painter = painterResource(R.drawable.baseline_north_west_24),
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        contentDescription = ""
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -146,7 +202,9 @@ private fun SearchResults(
 
             refresh is LoadState.NotLoading -> {
                 LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .navigationBarsPadding(),
                     contentPadding = contentPadding,
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
@@ -163,15 +221,17 @@ private fun SearchResults(
                             }
                         )
                     }
-                }
-            }
 
-            append is LoadState.Loading -> {
-                Loader(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(24.dp, 16.dp)
-                )
+                    if (append is LoadState.Loading) {
+                        item {
+                            Loader(
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(24.dp, 16.dp)
+                            )
+                        }
+                    }
+                }
             }
         }
     }
