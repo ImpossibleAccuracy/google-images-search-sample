@@ -2,6 +2,7 @@ package com.googleimagesearch.domain.model
 
 import com.googleimagesearch.domain.payload.ImageSize
 import com.googleimagesearch.domain.payload.SearchResultSource
+import java.io.Serializable
 
 sealed interface SearchResult<T : SearchType> {
     val title: String
@@ -10,7 +11,7 @@ sealed interface SearchResult<T : SearchType> {
         override val title: String,
         val snippet: String,
         val link: String,
-    ) : SearchResult<SearchType.Patents>
+    ) : SearchResult<SearchType.Patents>, Serializable
 
     data class GoogleImage(
         override val title: String,
@@ -19,5 +20,5 @@ sealed interface SearchResult<T : SearchType> {
         val thumbnailUrl: String,
         val thumbnailSize: ImageSize,
         val source: SearchResultSource,
-    ) : SearchResult<SearchType.Images>
+    ) : SearchResult<SearchType.Images>, Serializable // TODO: add Parcelable impl
 }

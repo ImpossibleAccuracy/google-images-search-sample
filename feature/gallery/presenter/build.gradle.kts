@@ -43,8 +43,9 @@ dependencies {
     implementation(project(Modules.NAVIGATION))
 
     implementation(libs.android.core)
+    implementation(libs.compose.activity)
 
-    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.runtime)
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
@@ -53,6 +54,10 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.collections)
 
+    implementation(libs.androidx.work)
     implementation(libs.coil)
+    implementation(libs.zoomable)
+    implementation(libs.accompanist.permissions)
+
     implementation(libs.paging.compose)
 }

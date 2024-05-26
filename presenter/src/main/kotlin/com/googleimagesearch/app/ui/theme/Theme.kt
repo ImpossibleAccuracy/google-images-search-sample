@@ -49,18 +49,15 @@ fun GoogleImageSearchTheme(
         else -> LightColorScheme
     }
 
-//    val view = LocalView.current
-//    if (!view.isInEditMode) {
-//        SideEffect {
-//            val window = (view.context as Activity).window
-//
-//            window.statusBarColor = colorScheme.background.toArgb()
-//            window.navigationBarColor = colorScheme.background.toArgb()
-//
-//            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
-//            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
-//        }
-//    }
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
+        }
+    }
 
     MaterialTheme(
         colorScheme = colorScheme,

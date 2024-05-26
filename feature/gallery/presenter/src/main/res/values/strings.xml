@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_image_saved">Image saved</string>
+    <string name="subtitle_image_saved">Saved as %s</string>
+
+    <string name="title_error_loading_image">Image unavailable</string>
+    <string name="subtitle_error_loading_image">Error while loading image</string>
+
+    <string name="downloading_file">Downloading your file…</string>
+    <string name="action_close">Close</string>
+</resources>

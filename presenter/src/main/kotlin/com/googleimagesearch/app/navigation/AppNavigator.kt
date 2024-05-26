@@ -28,6 +28,6 @@ class AppNavigator(
     private fun getPageByScreen(screen: SharedScreen): Screen =
         when (screen) {
             SharedScreen.Feed -> FeedPage()
-            is SharedScreen.Gallery -> GalleryPage(screen.selected, screen.items)
+            is SharedScreen.Gallery -> GalleryPage(screen.selected, screen.items.toMutableList())
         }
 }

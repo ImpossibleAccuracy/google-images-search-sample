@@ -18,3 +18,4 @@ include(":feature:feed:presenter")
 include(":feature:feed:di")
 
 include(":feature:gallery:presenter")
+include(":feature:gallery:di")

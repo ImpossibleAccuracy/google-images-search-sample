@@ -61,6 +61,7 @@ dependencies {
     implementation(project(Modules.FEATURE_FEED.DI))
 
     implementation(project(Modules.FEATURE_GALLERY.PRESENTER))
+    implementation(project(Modules.FEATURE_GALLERY.DI))
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.activity)

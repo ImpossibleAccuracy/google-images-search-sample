@@ -3,10 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
-group = AppConfig.buildGroup("feature", "feed")
+group = AppConfig.buildGroup("feature", "gallery", "di")
 
 android {
-    namespace = AppConfig.buildGroup("feature", "feed")
+    namespace = AppConfig.buildGroup("feature", "gallery", "di")
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -40,18 +40,11 @@ android {
 
 dependencies {
     implementation(project(Modules.DOMAIN))
-    implementation(project(Modules.NAVIGATION))
+    implementation(project(Modules.FEATURE_GALLERY.PRESENTER))
 
     implementation(libs.compose.runtime)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
 
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.koin.core)
+
     implementation(libs.kotlinx.collections)
-
-    implementation(libs.coil)
-    implementation(libs.paging.compose)
 }

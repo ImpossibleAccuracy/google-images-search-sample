@@ -20,7 +20,11 @@ voyager = "1.0.0"
 koin = "3.5.6"
 koin-compose = "1.1.5"
 
+work = "2.9.0"
 coil = "2.6.0"
+zoomable = "1.6.1"
+accompanist-permissions = "0.34.0"
+
 paging = "3.3.0"
 apiresult = "1.0.4"
 okhttp = "5.0.0-alpha.3"
@@ -45,7 +49,10 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", versi
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "compose-material" }
 
+androidx-work = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+zoomable = { module = "net.engawapg.lib:zoomable", version.ref = "zoomable" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist-permissions" }
 
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
