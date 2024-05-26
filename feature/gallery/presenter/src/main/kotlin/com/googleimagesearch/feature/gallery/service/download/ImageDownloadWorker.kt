@@ -47,14 +47,17 @@ class ImageDownloadWorker(
 
         showLoadingNotification()
 
-        val uri = downloadFileAndSave(
-            fileName = fileName,
-            fileUrl = fileUrl,
-            mimeType = mimeType,
-        )
-
-        NotificationManagerCompat.from(context).cancel(NotificationConstants.PROGRESS_NOTIFICATION_ID)
-
+        val uri = try {
+            downloadFileAndSave(
+                fileName = fileName,
+                fileUrl = fileUrl,
+                mimeType = mimeType,
+            )
+        } catch (e: Exception) {
+            return Result.failure()
+        } finally {
+            clearNotifications()
+        }
 
         return if (uri != null) {
             showImageSavedNotification(
@@ -108,6 +111,10 @@ class ImageDownloadWorker(
                 target,
             )
         }
+    }
+
+    private fun clearNotifications() {
+        NotificationManagerCompat.from(context).cancel(NotificationConstants.PROGRESS_NOTIFICATION_ID)
     }
 
     private fun showLoadingNotification() {
